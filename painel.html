@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Painel administrativo demonstrativo do LUME Hotel">
+  <title>Painel Administrativo | LUME Hotel</title>
+  <link rel="stylesheet" href="painel.css">
+</head>
+<body>
+<a href="#conteudo-principal" class="pular-conteudo">Pular para o conteúdo principal</a>
+<div class="painel-container">
+  <aside class="menu-lateral">
+    <div class="logo-painel"><span>♧</span><h2>LUME <small>HOTEL</small></h2></div>
+    <p class="menu-titulo">MENU PRINCIPAL</p>
+    <nav aria-label="Menu principal do painel">
+      <a href="#dashboard" class="ativo" data-modulo="dashboard" aria-current="page">▦ Dashboard</a>
+      <a href="#reservas" data-modulo="reservas">▣ Reservas</a>
+      <a href="#clientes" data-modulo="clientes">♙ Clientes</a>
+      <a href="#quartos" data-modulo="quartos">▤ Quartos</a>
+      <a href="#fornecedores" data-modulo="fornecedores">♧ Fornecedores</a>
+      <a href="#relatorios" data-modulo="relatorios">▥ Relatórios</a>
+    </nav>
+    <div class="menu-rodape"><a href="index.html">← Voltar ao site</a></div>
+  </aside>
+
+  <main id="conteudo-principal" class="conteudo-painel">
+    <div class="painel-idiomas" aria-label="Selecionar idioma">
+      <span data-traducao-painel="Idioma">Idioma</span>
+      <button type="button" data-idioma-painel="pt" aria-pressed="true">PT</button>
+      <button type="button" data-idioma-painel="en" aria-pressed="false">EN</button>
+      <button type="button" data-idioma-painel="es" aria-pressed="false">ES</button>
+    </div>
+    <section id="modulo-dashboard" class="modulo-conteudo">
+      <header class="topo-painel"><div><h1>Dashboard</h1><p>Visão geral da operação do LUME Hotel.</p></div><div class="usuario-painel"><span>Administrador</span><div class="avatar">A</div></div></header>
+      <section class="indicadores" aria-label="Indicadores gerais">
+        <article class="card-indicador"><span>Total de reservas</span><h2 id="totalReservas">0</h2><p>Reservas registradas</p></article>
+        <article class="card-indicador"><span>Receita estimada</span><h2 id="receitaTotal">R$ 0,00</h2><p>Valor bruto previsto</p></article>
+        <article class="card-indicador"><span>Quartos ocupados hoje</span><h2 id="quartosOcupados">0</h2><p>Unidades em uso hoje</p></article>
+        <article class="card-indicador"><span>Total de clientes</span><h2 id="totalClientes">0</h2><p>Cadastros ativos</p></article>
+      </section>
+      <section class="secao-painel"><div class="titulo-secao"><div><h2>Reservas recentes</h2><p>Últimas movimentações registradas.</p></div><button class="botao-link" type="button" data-ir="reservas">Ver reservas</button></div><div id="listaReservasPainel" class="lista-registros"><p class="estado-vazio">Nenhuma reserva encontrada.</p></div></section>
+      <section class="atalhos-grid">
+        <button type="button" class="atalho-card" data-ir="clientes"><strong>Clientes</strong><span>Consultar e atualizar hóspedes</span></button>
+        <button type="button" class="atalho-card" data-ir="quartos"><strong>Quartos</strong><span>Gerenciar acomodações e tarifas</span></button>
+        <button type="button" class="atalho-card" data-ir="fornecedores"><strong>Fornecedores</strong><span>Manter contatos e serviços</span></button>
+        <button type="button" class="atalho-card" data-ir="relatorios"><strong>Relatórios</strong><span>Conferir indicadores e exportar dados</span></button>
+      </section>
+    </section>
+
+    <section id="modulo-reservas" class="modulo-conteudo" hidden>
+      <header class="topo-painel"><div><h1>Reservas</h1><p>Consulte as reservas feitas pelo formulário do site.</p></div></header>
+      <section class="secao-painel"><div class="titulo-secao"><div><h2>Reservas registradas</h2><p>Os dados são compartilhados com a página de reservas neste navegador.</p></div></div>
+        <label class="campo-busca" for="buscarReserva">Pesquisar reserva</label><input id="buscarReserva" class="campo-pesquisa" type="search" placeholder="Código, hóspede, e-mail ou quarto">
+        <div class="filtros-linha"><label for="filtroReservaStatus">Situação</label><select id="filtroReservaStatus"><option value="todas">Todas</option><option value="futuras">Próximas</option><option value="hospedagem">Em hospedagem</option><option value="finalizadas">Finalizadas</option></select></div>
+        <div id="listaReservasAdmin" class="lista-registros"><p class="estado-vazio">Nenhuma reserva cadastrada.</p></div>
+      </section>
+    </section>
+
+    <section id="modulo-clientes" class="modulo-conteudo" hidden>
+      <header class="topo-painel"><div><h1>Clientes</h1><p>Gerencie os hóspedes cadastrados no LUME Hotel.</p></div></header>
+      <section class="secao-painel">
+        <div class="titulo-secao"><div><h2 id="tituloFormCliente">Novo cliente</h2><p>Preencha os dados para cadastrar ou atualizar um hóspede.</p></div></div>
+        <form id="formCliente" class="formulario-painel">
+          <div class="form-grid">
+            <div class="campo"><label for="clienteNome">Nome completo *</label><input id="clienteNome" required minlength="2" autocomplete="name"></div>
+            <div class="campo"><label for="clienteCpf">CPF *</label><input id="clienteCpf" required maxlength="14" inputmode="numeric" placeholder="000.000.000-00"></div>
+            <div class="campo"><label for="clienteEmail">E-mail *</label><input id="clienteEmail" type="email" required autocomplete="email"></div>
+            <div class="campo"><label for="clienteTelefone">Telefone</label><input id="clienteTelefone" type="tel" autocomplete="tel" inputmode="tel" maxlength="15" placeholder="(00) 00000-0000" aria-describedby="ajudaTelefoneCliente"><small id="ajudaTelefoneCliente" class="ajuda-campo">Informe o DDD e o número do telefone.</small></div>
+            <div class="campo campo-largo"><label for="clienteEndereco">Endereço</label><input id="clienteEndereco" autocomplete="street-address"></div>
+          </div>
+          <div class="acoes-form"><button class="botao-principal" type="submit" id="salvarCliente">Salvar cliente</button><button class="botao-secundario" type="reset">Limpar</button></div>
+        </form>
+      </section>
+      <section class="secao-painel secao-listagem"><div class="titulo-secao"><div><h2>Clientes cadastrados</h2><p>Consulte, edite ou exclua os registros.</p></div><span id="contadorClientes" class="contador">0 clientes</span></div>
+        <label class="campo-busca" for="buscarCliente">Pesquisar cliente</label><input id="buscarCliente" class="campo-pesquisa" type="search" placeholder="Nome, CPF ou e-mail">
+        <div id="listaClientes" class="lista-registros"><p class="estado-vazio">Nenhum cliente cadastrado.</p></div>
+      </section>
+    </section>
+
+    <section id="modulo-quartos" class="modulo-conteudo" hidden>
+      <header class="topo-painel"><div><h1>Quartos</h1><p>Gerencie acomodações, tarifas e disponibilidade para reservas.</p></div></header>
+      <section class="secao-painel"><div class="titulo-secao"><div><h2 id="tituloFormQuarto">Cadastrar acomodação</h2><p>Quartos ativos aparecem na página pública de reservas.</p></div></div>
+        <form id="formQuarto" class="formulario-painel"><div class="form-grid">
+          <div class="campo"><label for="quartoNome">Nome da acomodação *</label><input id="quartoNome" required placeholder="Ex.: Quarto Família"></div>
+          <div class="campo"><label for="quartoTipo">Categoria</label><select id="quartoTipo"><option>Standard</option><option>Deluxe</option><option>Suíte</option><option>Família</option></select></div>
+          <div class="campo"><label for="quartoPreco">Diária (R$) *</label><input id="quartoPreco" type="number" min="0.01" step="0.01" required></div>
+          <div class="campo"><label for="quartoCapacidade">Capacidade de hóspedes *</label><input id="quartoCapacidade" type="number" min="1" max="20" value="2" required></div>
+          <div class="campo campo-largo"><label for="quartoDescricao">Descrição</label><textarea id="quartoDescricao" rows="2" placeholder="Descreva os diferenciais da acomodação"></textarea></div>
+          <div class="campo campo-largo"><label for="quartoFoto">URL da imagem (opcional)</label><input id="quartoFoto" type="url" placeholder="https://..."></div>
+          <div class="campo"><label for="quartoStatus">Situação</label><select id="quartoStatus"><option value="ativo">Ativo para reservas</option><option value="inativo">Inativo</option></select></div>
+        </div><div class="acoes-form"><button class="botao-principal" type="submit">Salvar acomodação</button><button class="botao-secundario" type="reset">Limpar</button></div></form>
+      </section>
+      <section class="secao-painel secao-listagem"><div class="titulo-secao"><div><h2>Acomodações cadastradas</h2><p>Altere tarifas, capacidade ou situação.</p></div><span id="contadorQuartos" class="contador">0 quartos</span></div><input id="buscarQuartoAdmin" class="campo-pesquisa" type="search" aria-label="Pesquisar acomodações" placeholder="Pesquisar acomodação"><div id="listaQuartosAdmin" class="lista-registros"></div></section>
+    </section>
+
+    <section id="modulo-fornecedores" class="modulo-conteudo" hidden>
+      <header class="topo-painel"><div><h1>Fornecedores</h1><p>Organize os contatos e serviços que apoiam a operação do hotel.</p></div></header>
+      <section class="secao-painel"><div class="titulo-secao"><div><h2 id="tituloFormFornecedor">Cadastrar fornecedor</h2><p>Registre os dados comerciais e de contato.</p></div></div>
+        <form id="formFornecedor" class="formulario-painel"><div class="form-grid">
+          <div class="campo"><label for="fornecedorNome">Nome / Razão social *</label><input id="fornecedorNome" required></div>
+          <div class="campo"><label for="fornecedorCategoria">Categoria *</label><select id="fornecedorCategoria" required><option value="">Selecione</option><option>Alimentos e bebidas</option><option>Limpeza e lavanderia</option><option>Manutenção</option><option>Hospedagem e amenities</option><option>Tecnologia</option><option>Serviços gerais</option><option>Outros</option></select></div>
+          <div class="campo"><label for="fornecedorDocumento">CNPJ / CPF</label><input id="fornecedorDocumento" placeholder="Documento (opcional)"></div>
+          <div class="campo"><label for="fornecedorContato">Pessoa de contato</label><input id="fornecedorContato"></div>
+          <div class="campo"><label for="fornecedorTelefone">Telefone</label><input id="fornecedorTelefone" type="tel" autocomplete="tel" inputmode="tel" maxlength="15" placeholder="(00) 00000-0000" aria-describedby="ajudaTelefoneFornecedor"><small id="ajudaTelefoneFornecedor" class="ajuda-campo">Informe o DDD e o número do telefone.</small></div>
+          <div class="campo"><label for="fornecedorEmail">E-mail</label><input id="fornecedorEmail" type="email"></div>
+          <div class="campo campo-largo"><label for="fornecedorObservacao">Observações</label><textarea id="fornecedorObservacao" rows="2"></textarea></div>
+          <div class="campo"><label for="fornecedorStatus">Situação</label><select id="fornecedorStatus"><option value="ativo">Ativo</option><option value="inativo">Inativo</option></select></div>
+        </div><div class="acoes-form"><button class="botao-principal" type="submit">Salvar fornecedor</button><button class="botao-secundario" type="reset">Limpar</button></div></form>
+      </section>
+      <section class="secao-painel secao-listagem"><div class="titulo-secao"><div><h2>Fornecedores cadastrados</h2><p>Consulte e mantenha os contatos atualizados.</p></div><span id="contadorFornecedores" class="contador">0 fornecedores</span></div><input id="buscarFornecedor" class="campo-pesquisa" type="search" aria-label="Pesquisar fornecedores" placeholder="Nome, categoria ou contato"><div id="listaFornecedores" class="lista-registros"></div></section>
+    </section>
+
+    <section id="modulo-relatorios" class="modulo-conteudo" hidden>
+      <header class="topo-painel"><div><h1>Relatórios</h1><p>Indicadores gerenciais calculados a partir dos dados deste navegador.</p></div></header>
+      <section class="secao-painel"><div class="titulo-secao"><div><h2>Resumo gerencial</h2><p>Filtre o período para analisar reservas e receita estimada.</p></div><button type="button" class="botao-principal" id="exportarRelatorio">Exportar CSV</button></div>
+        <div class="form-grid filtros-relatorio"><div class="campo"><label for="relatorioInicio">Data inicial</label><input type="date" id="relatorioInicio"></div><div class="campo"><label for="relatorioFim">Data final</label><input type="date" id="relatorioFim"></div><div class="campo"><label for="relatorioQuarto">Acomodação</label><select id="relatorioQuarto"><option value="todos">Todas</option></select></div><div class="campo campo-alinhar"><button type="button" class="botao-secundario" id="limparFiltrosRelatorio">Limpar filtros</button></div></div>
+        <div class="indicadores indicadores-relatorio"><article class="card-indicador"><span>Reservas no período</span><h2 id="relTotalReservas">0</h2></article><article class="card-indicador"><span>Receita estimada</span><h2 id="relReceita">R$ 0,00</h2></article><article class="card-indicador"><span>Noites reservadas</span><h2 id="relNoites">0</h2></article><article class="card-indicador"><span>Ticket médio</span><h2 id="relTicket">R$ 0,00</h2></article></div>
+        <h3 class="subtitulo-relatorio">Reservas por acomodação</h3><div id="relatorioPorQuarto" class="lista-registros"></div>
+        <p class="nota-relatorio">Os valores são estimativas calculadas com base na diária cadastrada e no número de noites. O projeto é demonstrativo e não substitui um sistema hoteleiro de produção.</p>
+      </section>
+    </section>
+  </main>
+</div>
+<script src="idiomas.js"></script>
+<script src="painel.js"></script>
+</body>
+</html>
